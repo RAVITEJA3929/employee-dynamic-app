@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${employee.id} ? 'Edit Employee' : 'Add Employee'">Employee Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/dynamic-style.css" rel="stylesheet">
+</head>
+<body class="dashboard-bg">
+    <div class="container-fluid py-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-transparent text-center py-4">
+                        <h2 class="mb-0" th:text="${employee.id} ? 'Edit Employee' : 'Add New Employee'">
+                            Add New Employee
+                        </h2>
+                    </div>
+                    <div class="card-body p-5">
+                        <form th:action="@{/employees}" th:object="${employee}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Full Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" th:field="*{name}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control" th:field="*{email}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Phone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        <input type="text" class="form-control" th:field="*{phone}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Department</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                        <input type="text" class="form-control" th:field="*{department}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Position</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                        <input type="text" class="form-control" th:field="*{position}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Salary</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" step="0.01" class="form-control" th:field="*{salary}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Skills</label>
+                                    <textarea class="form-control" rows="3" th:field="*{skills}"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Address</label>
+                                    <textarea class="form-control" rows="2" th:field="*{address}"></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3 mt-5">
+                                <a href="/employees" class="btn btn-outline-secondary btn-lg px-5">
+                                    <i class="fas fa-arrow-left me-2"></i>Cancel
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg px-5 gradient-btn">
+                                    <i class="fas fa-save me-2"></i>
+                                    <span th:text="${employee.id} ? 'Update Employee' : 'Add Employee'">Save</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

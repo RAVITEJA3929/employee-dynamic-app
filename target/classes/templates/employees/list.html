@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees - Dynamic EMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/dynamic-style.css" rel="stylesheet">
+</head>
+<body class="dashboard-bg">
+    <!-- Same navbar as dashboard -->
+    
+    <div class="container-fluid py-5 mt-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="text-white mb-0"><i class="fas fa-users me-2"></i>Employee Directory</h2>
+                    <a href="/employees/new" class="btn btn-primary btn-lg gradient-btn shadow-lg">
+                        <i class="fas fa-plus-circle me-2"></i>Add New Employee
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Department</th>
+                                        <th>Position</th>
+                                        <th>Salary</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="employee : ${employees}">
+                                        <td th:text="${employee.id}"></td>
+                                        <td><div class="avatar-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">JD</div></td>
+                                        <td th:text="${employee.name}"></td>
+                                        <td th:text="${employee.email}"></td>
+                                        <td><span class="badge bg-primary" th:text="${employee.department}">Engineering</span></td>
+                                        <td th:text="${employee.position}"></td>
+                                        <td th:text="${#numbers.formatCurrency(employee.salary)}"></td>
+                                        <td>
+                                            <span class="badge bg-success px-3 py-2" th:text="${employee.status}">ACTIVE</span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a th:href="@{/employees/edit/{id}(id=${employee.id})}" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a th:href="@{/employees/delete/{id}(id=${employee.id})}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
